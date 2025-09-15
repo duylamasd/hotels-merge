@@ -6,7 +6,7 @@ import (
 )
 
 type DBStore struct {
-	Queries  *sqlc.Queries
+	Queries  sqlc.Querier
 	ConnPool *pgxpool.Pool
 }
 

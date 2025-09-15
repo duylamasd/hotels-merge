@@ -10,22 +10,26 @@ import (
 	"go.uber.org/zap"
 )
 
-type HotelController struct {
+type hotelController struct {
 	logger  *zap.Logger
 	service domains.HotelService
+}
+
+type HotelController interface {
+	Find(ctx *gin.Context)
 }
 
 func NewHotelController(
 	logger *zap.Logger,
 	service domains.HotelService,
-) *HotelController {
-	return &HotelController{
+) HotelController {
+	return &hotelController{
 		logger:  logger,
 		service: service,
 	}
 }
 
-func (c *HotelController) Find(ctx *gin.Context) {
+func (c *hotelController) Find(ctx *gin.Context) {
 	var query v1Dto.FindHotelsQueryDTO
 	c.logger.Info("GET /api/v1/hotels - Validating query params")
 	if err := ctx.ShouldBindQuery(&query); err != nil {

@@ -6,7 +6,7 @@ import (
 )
 
 type HotelRoutes struct {
-	controller *v1Controllers.HotelController
+	controller v1Controllers.HotelController
 }
 
 func (s *HotelRoutes) Register(group *gin.RouterGroup) {
@@ -15,7 +15,7 @@ func (s *HotelRoutes) Register(group *gin.RouterGroup) {
 }
 
 func NewHotelRoutes(
-	controller *v1Controllers.HotelController,
+	controller v1Controllers.HotelController,
 ) *HotelRoutes {
 	return &HotelRoutes{
 		controller: controller,
