@@ -7,7 +7,7 @@ type HotelImage struct {
 
 type HotelImages struct {
 	Rooms     []HotelImage `json:"rooms"`
-	Services  []HotelImage `json:"services"`
+	Site      []HotelImage `json:"site"`
 	Amenities []HotelImage `json:"amenities"`
 }
 
