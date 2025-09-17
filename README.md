@@ -296,6 +296,16 @@ make apply_migration
 go run cmd/app.go
 ```
 
+Alternatively, you can build the docker image with:
+```bash
+docker build -t hotels-merge .
+```
+Then run the container with environment variables set as `.env` file, following the `.env.example` template:
+```bash
+docker run --env-file ./.env -p 8080:8080 hotels-merge
+```
+Make sure the postgres instance is reachable from the container.
+
 #### Unit tests
 Just simply navigate to the source, install the dependencies and run the tests with `make run_unit_tests` command.
 Here is the results of unit tests and integration tests:
