@@ -28,3 +28,8 @@ hotels-merge
 app
 
 .DS_Store
+
+.git/
+.gitignore
+.vscode/
+.idea/

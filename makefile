@@ -23,3 +23,9 @@ revert_migration:
 
 sqlc_generate:
 	sqlc generate
+
+run_unit_tests:
+	@go test -v $$(go list ./... | grep -v ./tests/e2e)
+
+run_e2e_tests:
+	@go test -v ./tests/e2e

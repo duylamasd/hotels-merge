@@ -1,0 +1,34 @@
+services:
+  test-db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: testuser
+      POSTGRES_PASSWORD: testpass
+      POSTGRES_DB: ascenda
+    ports:
+      - 5432:5432
+    tmpfs:
+      - /var/lib/postgresql/data
+  migrations:
+    image: arigaio/atlas:latest-alpine
+    depends_on:
+      - test-db
+    entrypoint: >
+      sh -c "
+        sleep 10 &&
+        atlas migrate apply --url postgres://testuser:testpass@test-db:5432/ascenda?sslmode=disable --dir file://migrations
+      "
+    volumes:
+      - "./db/migrations:/migrations"
+  app-test:
+    build:
+      dockerfile: ./test.Dockerfile
+    environment:
+      - DB_URI=postgres://testuser:testpass@test-db:5432/ascenda?sslmode=disable
+      - GO_ENV=test
+    depends_on:
+      test-db:
+        condition: service_started
+      migrations:
+        condition: service_completed_successfully
+    command: go test -v ./tests/e2e
