@@ -2,6 +2,13 @@
 
 This repository contains main part of the solution for the Ascenda Challenges: Hotels Data Merge. The goal of this challenge is to merge datasets containing hotel information from different sources, ensuring data consistency and accuracy.
 
+## Prequisites
+
+- Go version 1.24
+- A running PostgreSQL instance
+- Docker and Docker-compose for e2e tests
+- Atlas CLI for database migration. Here is the [link](https://atlasgo.io/docs).
+
 ## Solution Overview
 
 The solution includes 2 repositories:
@@ -273,9 +280,20 @@ Here is an example of the response
 The implementation of the API is in this [link](https://github.com/duylamasd/hotels-merge). It includes the API endpoint, is dockerized with Docker and orchestrated with docker-compose along with the PostgreSQL database for easy setup and deployment. Furthermore, the docker-compose is used for e2e tests.
 
 #### How to run app
-Just run `go run cmd/app.go` to start the app. Make sure you have a running PostgreSQL instance and set the environment variables as in `.env` file, following the `.env.example` file. Plus, you need to have the database and the `hotels` table created as in the schema above by installing [Atlas](https://atlasgo.io/), create database and run migration with:
+- Make sure you have Go version 1.24 installed, a running PostgreSQL instance and set the environment variables as in `.env` file, following the `.env.example` file.
+- Install the dependencies with:
+```bash
+go mod download
+```
+- Install Atlas CLI for database migration. Here is the [link](https://atlasgo.io/docs).
+- Create database and run migration with:
 ```bash
 make apply_migration
+```
+- Configure the [crawler](https://github.com/duylamasd/hotels-merge-crawler) and run it to populate the database with merged hotel data. For more details, please check the README in the crawler repository.
+- Run the app with:
+```bash
+go run cmd/app.go
 ```
 
 #### Unit tests
