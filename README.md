@@ -391,4 +391,7 @@ This case will return 200 with empty array
 </details>
 
 # Conclusion
+
+This solution provides a comprehensive approach to merging hotel data from multiple sources, ensuring data consistency and accuracy. The use of Go for the API, PostgreSQL for data storage, and Docker for containerization makes the solution robust and scalable. Furthermore, the inclusion of unit tests and e2e tests ensures the reliability of the system. With this setup, users can easily retrieve accurate hotel information based on their needs. And the crawler can be scheduled to run periodically to keep the data up-to-date.
+
 Hope you find this solution helpful and comprehensive. If you have any questions or feedback, please don't hestitate to email me as address `duylamasd@gmail.com`. Thank you for checking out my solution!
